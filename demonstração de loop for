@@ -1,0 +1,18 @@
+produtos = int (input("Quantos produts são: "))
+
+dict = {}
+
+for i in range(produtos):
+    while True:
+        try:
+            nome = str(input("qual o nome do produto: "))
+            preço = float(input("qual o preço do produto: "))
+            dict[nome] = preço
+            break
+
+        except:
+            print("O valor dever se composto por numeros e os centavos devem ser separados por ponto")
+
+
+for nome, valor in dict.items():
+    print(f"{nome}: {valor}")
