@@ -1,0 +1,80 @@
+import tkinter as tk
+
+def add():
+    try:
+        result.set(value1.get() + value2.get())
+    except tk.TclError:
+        print("erro")
+def sub():
+    try:
+        result.set(value1.get() - value2.get())
+    except tk.TclError:
+        print("erro")
+
+def plus():
+    try:
+        result.set(value1.get() * value2.get())
+    except tk.TclError:
+        print("erro")
+
+def div():
+    try:
+        result.set(value1.get() / value2.get())
+
+
+    except tk.TclError:
+        print("erro")
+
+
+
+
+main_window = tk.Tk()
+#main_window.wm_state("zoomed")
+main_window.config(bg= "white")
+default_font = ("Aryal", 30)
+
+frame1 = tk.Frame()
+frame1.pack(pady = 100)
+
+frame2 = tk.Frame()
+frame2.pack(pady = 100)
+
+frame3 = tk.Frame()
+frame3.pack(pady = 100)
+
+value1 = tk.IntVar()
+value2 = tk.IntVar()
+
+value1_input = tk.Entry(frame1, font=default_font, textvariable=value1, bg="gray")
+value1_input.pack()
+value2_input = tk.Entry(frame1, font=default_font, textvariable=value2, bg="gray")
+value2_input.pack()
+
+result = tk.DoubleVar()
+
+button_add = tk.Button(frame2, text="+", font=default_font, command= add, bg= "green", relief="flat")
+button_add.grid(row = 0, column = 0, padx = 20, pady = 20)
+
+button_sub = tk.Button(frame2, text="_", font=default_font, command= sub, bg= "red", relief="flat")
+button_sub.grid(row = 0, column = 1, padx = 20)
+
+button_pls = tk.Button(frame2, text="X", font=default_font, command= plus, bg= "blue", relief="flat")
+button_pls.grid(row = 0, column = 2, padx = 20, pady = 20)
+
+button_div = tk.Button(frame2, text="/", font=default_font, command= div, bg="yellow", relief="flat")
+button_div.grid(row = 0, column = 3, padx = 20, pady = 20)
+
+
+result_label = tk.Label(frame3, font=default_font, textvariable=result, bg="gray")
+result_label.pack()
+
+
+
+
+
+
+
+
+
+
+main_window.mainloop()
