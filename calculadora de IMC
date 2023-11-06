@@ -1,0 +1,58 @@
+def Calculadora_De_IMC():
+
+    peso = eval(input("Digite seu peso: "))
+    altura = eval(input("Digite sua altura em metros: "))
+    altura /= 100
+    imc = peso / (altura * altura)
+
+    def EMC(imc):
+        if imc < 17:
+            imc_ideal = 27
+            peso_ideal = (peso*imc_ideal)/imc
+            print(f"Seu IMC é de {imc}, e utilizando a tabela você está muito abaixo do seu peso ideal, e seu peso ideal é {peso_ideal}.")
+
+
+
+        elif 17 <= imc <= 24.9:
+            imc_ideal = 27
+            peso_ideal = (peso * imc_ideal) / imc
+            print(f"Seu IMC é de {imc}, e utilizando a tabela você está abaixo do seu peso ideal, e seu peso ideal é {peso_ideal}.")
+
+
+        elif 25 <= imc <= 29.9:
+            imc_ideal = 27
+            peso_ideal = (peso * imc_ideal) / imc
+            print(f"Seu IMC é de {imc}, e utilizando a tabela você está no peso ideal, e seu peso ideal é {peso_ideal}.")
+
+
+        elif 30 <= imc <= 34.9:
+            imc_ideal = 27
+            peso_ideal = (peso * imc_ideal) / imc
+            print(f"Seu IMC é de {imc}, e utilizando a tabela você está com obesidade grau I, e seu peso ideal é {peso_ideal}.")
+
+
+        elif 35 <= imc <= 40.9:
+            imc_ideal = 27
+            peso_ideal = (peso * imc_ideal) / imc
+            print(f"Seu IMC é de {imc}, e utilizando a tabela você está com obesidade grau II, e seu peso ideal é {peso_ideal}.")
+
+
+        elif imc >= 41:
+            imc_ideal = 27
+            peso_ideal = (peso * imc_ideal) / imc
+            print(f"Seu IMC é de {imc}, e utilizando a tabela você está com obesidade grau III, e seu peso ideal é {peso_ideal}.")
+
+
+
+    EMC(imc)
+
+while True:
+    Calculadora_De_IMC()
+
+
+
+
+
+
+
+
