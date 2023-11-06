@@ -1,0 +1,37 @@
+import time as tm
+
+
+while True:
+    try:
+        valorTotal = float(input("coloque o numero, e se for um numero float use ponto ao invez da virgula: "))
+        chave = float(input("coloque o numero da chave, e se for um numero float use ponto ao inves da virgula: "))
+        resultado = valorTotal / chave
+        tm.sleep(1)
+        print(f"O resultado é {resultado}")
+        break
+
+    except ValueError:
+        tm.sleep(2)
+        print ("Digite numero so inves de letras e caracteres especiais")
+        tm.sleep(1)
+
+    except ZeroDivisionError:
+        tm.sleep(2)
+        print("A chave não pode ser 0")
+        tm.sleep(1)
+
+
+#é importante tratar excessões para evitar que gere codigos de erros e deixe buracos no codigo, no qual pessoas podem atacar o programa.
+
+
+
+
+
+
+
+
+
+
+
+
+
