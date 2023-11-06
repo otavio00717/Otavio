@@ -1,0 +1,90 @@
+import tkinter as tk
+import tkinter.simpledialog
+
+main_window = tk.Tk()
+main_window.title("Gerenciador de Contatos")
+
+title_font = ("Arial", 30)
+text_font = ("Arial", 20)
+
+canvas = tk.Canvas(main_window, bg="white")
+canvas.pack(side="left", fill="both", expand=True)
+
+frame_top = tk.Frame(canvas, bg="#313131", height=100)
+frame_top.pack(fill="x")
+
+frame_base = tk.Frame(canvas, bg="#535353")
+frame_base.pack(fill="both", expand=True)
+
+frame_list_grid = tk.Frame(canvas, bg="#535353")
+frame_list_grid.pack(fill="both", expand=True)
+
+label_title = tk.Label(frame_top, text="Gerenciador de Contatos", bg="#313131", fg="#fffc00", font=title_font)
+label_title.pack()
+
+
+
+lista = {}
+labels = []
+column = 0
+row = 0
+row_max = 9
+
+def on_canvas_configure(event):
+    canvas.configure(scrollregion=canvas.bbox("all"))
+
+
+
+def on_scroll(event):
+    canvas.yview_scroll(-1 * (event.delta // 120), "units")
+
+
+def abrir_popup():
+    pop_up = tk.Tk()
+    pop_up.config(bg="#535353")
+
+
+
+    entry1 = tk.Entry(pop_up, font=text_font, background= "#313131")
+    entry2 = tk.Entry(pop_up, font=text_font, background= "#313131")
+
+    entry1_label = tk.Label(pop_up, text="Nome do contato:", font=text_font, bg=("#535353"))
+    entry2_label = tk.Label(pop_up, text="numero, email ou endereço:", font=text_font,bg="#535353")
+
+    entry1_label.pack()
+    entry1.pack()
+    entry2_label.pack()
+    entry2.pack()
+
+    def add_to_lista():
+        global row,column,row_max
+        chave = entry1.get()
+        valor = entry2.get()
+        if chave and valor:
+            label_contact = tk.Label(frame_list_grid, text="Contato", font=text_font, bg="#313131", fg="#fffc00")
+            lista[chave] = valor
+            label_contact.config(text=f"{chave}: {valor}")
+            labels.append(label_contact)
+            if row >= row_max:
+                label_contact.grid(row=row, column=column, pady=20)
+                row = 0
+                column += 1
+                
+
+            else:
+                label_contact.grid(row=row, column=column, pady=20)
+                row += 1
+
+        pop_up.destroy()
+
+    button2 = tk.Button(pop_up, text="Adicionar", font=text_font, command=add_to_lista, fg= "#fffc00",bg= "#313131")
+    button2.pack(pady = 50)
+
+    pop_up.mainloop()
+
+button = tk.Button(frame_base, text="Adicionar Contato", font=text_font, command=abrir_popup, bg= "#313131", fg= "#fffc00",relief="flat", activebackground= "#fffc00")
+button.pack(pady=50)
+
+
+
+main_window.mainloop()
