@@ -1,0 +1,313 @@
+import tkinter as tk
+from tkinter import messagebox
+class Conta:
+    def __init__(self, name, document, age, adress, phone,city,state, relationship):
+        self.name = name
+        self.document = document
+        self.age = age
+        self.adress = adress
+        self.phone = phone
+        self.city = city
+        self.state = state
+        self.relationship = relationship
+
+    def __str__(self):
+        return self.name
+    def account_informations(self):
+        print(f"Name: {self.name}\nDocument: {self.document}\nAge: {self.age}"
+              f"\nAdress: {self.adress}\nPhone: {self.phone}\nCity: {self.city}"
+              f"\nState: {self.state}\nRelationship: {self.relationship}")
+
+    def account_change_name(self,name):
+        self.name = name
+        print(f"new name: {self.name}")
+
+    def account_change_document(self,document):
+        self.document = document
+        print(f"new document: {self.document}")
+
+    def account_change_document(self,age):
+        self.age = age
+        print(f"new age: {self.age}")
+
+    def account_change_adress(self,adress):
+        self.adress = adress
+        print(f"new age: {self.adress}")
+
+    def account_change_phone(self,phone):
+        self.phone = phone
+        print(f"new age: {self.phone}")
+
+    def account_change_city(self,city):
+        self.city = city
+        print(f"new age: {self.city}")
+
+    def account_change_city(self,state):
+        self.state = state
+        print(f"new age: {self.state}")
+
+    def account_change_relationship(self, relationship):
+        self.relationship = relationship
+        print(f"new age: {self.relationship}")
+
+
+#código da interface
+
+#variaveis
+instancia_da_janela_de_dados = 0
+main_window = tk.Tk()
+
+accounts = {}
+creating_token = False
+
+main_window.state("zoomed")
+main_window.configure(bg= "#d3d3d3")
+
+#base frames
+frame1 = tk.Frame(main_window, bg = "red") #frame das entradas de dados
+frame2 = tk.Frame(main_window, bg= "#d3d3d3") #frame da lista
+frame3 = tk.Frame(main_window, bg= "#d3d3d3")
+frame4 = tk.Frame(main_window,width=1350, height=950,bg="white", highlightthickness=2)
+frame5 = tk.Frame(main_window, highlightthickness=2)
+
+frame_name = tk.Frame(frame4)
+frame_document = tk.Frame(frame4)
+frame_age = tk.Frame(frame4)
+frame_adress = tk.Frame(frame4)
+frame_phone = tk.Frame(frame4)
+frame_city = tk.Frame(frame4)
+frame_state = tk.Frame(frame4)
+frame_relationship = tk.Frame(frame4)
+
+#fonts
+default_font = ("Aryal", 15) #fonte das entrys
+alternative_font = ("Aryal", 30) #fonte geral
+entry_font = ("Aryal", 16)
+
+#listas
+list = tk.Listbox(frame2, selectmode=tk.SINGLE, font= default_font, height= 30, width= 40) #lista onde fica as fichas
+
+#botões
+button_create = tk.Button(frame4, text="Criar",font=entry_font)
+
+#labels
+list_label_name = tk.Label(frame2, text= "Fichas", font= entry_font) #label que identifica a caixa de fichas
+client_label_name = tk.Label(frame_name, text="Nome: ", font= entry_font) #labelque identifica a caixa de nomes
+client_label_document = tk.Label(frame_document, text="CPF/RG: ", font= entry_font) #label que identifica a caixa de cpf
+client_label_age = tk.Label(frame_age, text="Idade: ", font= entry_font, bg= "#d3d3d3") #label que identifica a caixa de idade
+client_label_adress = tk.Label(frame_adress, text= "Endereço: ", font=entry_font) #label que identifica a caixa de endereço
+client_label_phone = tk.Label(frame_phone, text= "Telefone/Celular: ", font=entry_font) #label que identifica a caixa de telefone/celular
+client_label_city = tk.Label(frame_city, text= "Cidade: ", font= entry_font) #label que identifica a caixa da cidade
+client_label_state = tk.Label(frame_state, text="Estado: ", font=entry_font) #label que identifica a caixa de estado
+client_label_relationship = tk.Label(frame_relationship, text= "Estado civil: ",font=entry_font) #label que identifica a caixa de estado civil
+
+account_label_name = tk.Label(frame5, font=entry_font)
+account_label_age = tk.Label(frame5, font=entry_font)
+account_label_document = tk.Label(frame5, font=entry_font)
+account_label_adress = tk.Label(frame5, font=entry_font)
+account_label_phone = tk.Label(frame5, font=entry_font)
+account_label_city = tk.Label(frame5, font=entry_font)
+account_label_state = tk.Label(frame5, font=entry_font)
+account_label_relationship = tk.Label(frame5, font=entry_font)
+
+
+
+
+
+#entrys
+client_entry = tk.Entry(frame_name, textvariable="0",font=entry_font, width=50) #entrada do nome da conta e docliente
+document_entry = tk.Entry(frame_document, textvariable="1", font=entry_font, width=50) #entrada do cpf
+age_entry = tk.Entry(frame_age, textvariable="2", font=entry_font, width=50) #entrada da idade
+adress_entry = tk.Entry(frame_adress , textvariable="3", font=entry_font, width=50) #entrada do endereço
+phone_entry = tk.Entry(frame_phone, textvariable="4", font=entry_font, width=50) #entrada do telefone
+city_entry = tk.Entry(frame_city, textvariable="5", font= entry_font, width=50) #entrada da cidade
+state_entry = tk.Entry(frame_state, textvariable="6", font=entry_font, width=50) #entrada do campo estado)
+relationship_entry = tk.Entry(frame_relationship, textvariable= "7", font=entry_font, width=50) #entrada do campo estado civil
+
+#funções
+
+def button_hide_frame4():
+    frame4.place_forget()
+
+def button_hide_frame5():
+    frame5.place_forget()
+def clear_entrys():
+    global creating_token
+    client_entry.delete(0,"end")
+    document_entry.delete(0,"end")
+    age_entry.delete(0,"end")
+    adress_entry.delete(0,"end")
+    phone_entry.delete(0,"end")
+    city_entry.delete(0,"end")
+    state_entry.delete(0,"end")
+    relationship_entry.delete(0,"end")
+    creating_token = False
+def add_item_in_list(account):
+    accounts[account.name] = account
+    list.insert(tk.END, account)
+
+def get_account_name_on_list(event):
+    if creating_token == False:
+        button_hide_frame4()
+        button_hide_frame5()
+    index = list.curselection()
+    if index:  # Verificar se um item foi selecionado
+        # Obter o nome da conta selecionada
+        selected_account_name = list.get(index)
+        # Obter a instância da classe Conta correspondente do dicionário
+        selected_account = accounts[selected_account_name]
+        call_frame5_with_accounts_documents(selected_account)
+        print(selected_account.name)
+
+    else:
+        print("Nenhum item selecionado.")
+
+def call_frame5_with_accounts_documents(account):
+
+
+    # Aplicar pack() aos labels com pady=30
+    account_label_name.configure(text=f"Nome: {account.name}")
+    account_label_name.pack(pady=30)
+
+    account_label_age.configure(text=f"Idade: {account.age}")
+    account_label_age.pack(pady=30)
+
+    account_label_document.configure(text=f"CPF/RG: {account.document}")
+    account_label_document.pack(pady=30)
+
+    account_label_adress.configure(text=f"Endereço: {account.adress}")
+    account_label_adress.pack(pady=30)
+
+    account_label_phone.configure(text=f"Telefone/Celular: {account.phone}")
+    account_label_phone.pack(pady=30)
+
+    account_label_city.configure(text=f"Cidade: {account.city}")
+    account_label_city.pack(pady=30)
+
+    account_label_state.configure(text=f"Estado: {account.state}")
+    account_label_state.pack(pady=30)
+
+    account_label_relationship.configure(text=f"Estado Civil: {account.relationship}")
+    account_label_relationship.pack(pady=30)
+
+    frame5.place(x=529, y=40)
+
+def button_create_client():
+    global creating_token
+    name = client_entry.get()
+    age = age_entry.get()
+    document = document_entry.get()
+    adress = adress_entry.get()
+    phone = phone_entry.get()
+    city = city_entry.get()
+    state = state_entry.get()
+    relationship = relationship_entry.get()
+    creating_token = True
+
+    if not age or not name or not document or not adress or not phone or not city or not state or not relationship:
+        messagebox.showerror("erro", "preencha todos os dados")
+
+
+    else:
+        try:
+            age = int(age)
+            print(type(age))
+            if age < 18:
+                messagebox.showerror("erro", "Idade invalida (menor de 18 anos não podem abrir ficha)")
+            else:
+                account = Conta(name, document, age, adress, phone, city, state, relationship)
+                add_item_in_list(account)
+                clear_entrys()
+                button_hide_frame4()
+
+        except:
+            messagebox.showerror("erro", "O campo idade deve ser preenchido por numeros")
+
+def button_call_create_client():
+    button_hide_frame5()
+    frame4.place(x=529, y=40)
+    button_create.configure(command= button_create_client)
+    button_create.pack()
+
+
+
+
+
+def delete_selection():
+    item = list.curselection()
+    if item:
+        list.delete(item)
+
+#inicio do código
+
+button_create_account = tk.Button(frame1, text = "criar ficha", font= alternative_font, command= button_call_create_client)
+button_delete_listitem = tk.Button(frame3, text= "Deletar ficha", font=default_font, command= delete_selection)
+button_edit_listitem = tk.Button(frame3, text= "Editar", font= default_font)
+
+frame1.place(x = 170, y = 30)
+frame2.place (x= 50, y= 150)
+frame3.place (x= 140, y = 935)
+
+#entrada do nome da conta e do cliente
+frame_name.pack(pady=30)
+client_label_name.pack(side= "left")
+client_entry.pack()
+
+#entrada do cpf/rg
+frame_document.pack(pady=30)
+client_label_document.pack(side = "left")
+document_entry.pack()
+
+#entrada da idade
+frame_age.pack(pady=30)
+client_label_age.pack(side = "left")
+age_entry.pack()
+
+#entrada do endereço
+frame_adress.pack(pady=30)
+client_label_adress.pack(side="left")
+adress_entry.pack()
+
+#entrada do telefone/celular
+frame_phone.pack(pady = 30)
+client_label_phone.pack(side="left")
+phone_entry.pack()
+
+#entrada do campo cidade
+frame_city.pack(pady=30)
+client_label_city.pack(side="left")
+city_entry.pack()
+
+#entrada do campo Estado
+frame_state.pack(pady=30)
+client_label_state.pack(side="left")
+state_entry.pack()
+
+#entrada do campo estado Civil
+frame_relationship.pack(pady = 30)
+client_label_relationship.pack(side="left")
+relationship_entry.pack()
+
+list_label_name.pack()
+list.pack()
+button_create_account.pack()
+button_delete_listitem.pack(side="right", padx=20)
+button_edit_listitem.pack(side="right")
+list.bind("<<ListboxSelect>>", get_account_name_on_list)
+
+main_window.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
